@@ -1,0 +1,36 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-73.87, 40.77]
+      },
+      "properties": {
+        "mylist": [],
+        "name": "LGA",
+        "features": ["identity"],
+        "terminalHours": {
+          "Terminal A": "9am - 8pm",
+          "Terminal C": "9am - 9pm"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-74.27, 40.68]
+      },
+      "properties": {
+        "name": "EWR",
+        "features": ["identity", "lounge"],
+        "terminalHours": {
+          "Terminal 2": "9am - 8pm",
+          "Terminal 3": "9am - 9pm"
+        }
+      }
+    }
+  ]
+}

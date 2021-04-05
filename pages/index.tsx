@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Typography, Box, Button } from '@material-ui/core';
+import Map from "./maps";
 import Link from 'next/link';
 
 export default function Index() {
@@ -15,6 +16,7 @@ export default function Index() {
               Go to the venues page
             </Button>
           </Link>
+          <Map height={1000} />
         </Box>
       </Container>
     </React.Fragment>
