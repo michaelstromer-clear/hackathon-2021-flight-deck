@@ -1,4 +1,12 @@
-import { Venue, Feature, Location, Category, Action } from 'types';
+import {
+  Venue,
+  Feature,
+  Location,
+  Category,
+  Action,
+  GeometryFeature,
+  GeometryType,
+} from 'types';
 
 export function createCategory(
   image: string,
@@ -19,8 +27,11 @@ export function createLocation(
   lng: number
 ): Location {
   return {
-    type: 'Feature',
-    coordinates: [lat, lng],
+    type: GeometryFeature.Feature,
+    geometry: {
+      type: GeometryType.Point,
+      coordinates: [lat, lng],
+    },
     properties: {
       name,
       slugName,
@@ -38,8 +49,11 @@ export function createVenue(
   features: Array<Feature>
 ): Venue {
   return {
-    type: 'Feature',
-    coordinates: [lat, lng],
+    type: GeometryFeature.Feature,
+    geometry: {
+      type: GeometryType.Point,
+      coordinates: [lat, lng],
+    },
     properties: {
       name,
       slugName,

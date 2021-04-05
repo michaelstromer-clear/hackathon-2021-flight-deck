@@ -5,26 +5,28 @@ export interface Category {
   name: string;
   slugName: string;
 }
-/*
-Example Geometry Point using GeoJSON:
-{
-  "type": "Feature",
-  "geometry": {
-    "type": "Point",
-    "coordinates": [125.6, 10.1]
-  },
-  "properties": {
-    "name": "Dinagat Islands"
-  }
-}
-*/
-export interface GeometryPoint {
-  type: string;
-  coordinates: Array<number>;
-  properties: any;
+
+export enum GeometryFeature {
+  Feature = 'Feature',
 }
 
-export interface Venue extends GeometryPoint {
+export enum GeometryType {
+  Point = 'Point',
+  LineString = 'LineString',
+  Polygon = 'Polygon',
+  MultiPoint = 'MultiPoint',
+  MultiLineString = 'MultiLineString',
+  MultiPolygon = 'MultiPolygon',
+}
+
+export interface GeometryPoint {
+  type: GeometryType.Point;
+  coordinates: Array<number>;
+}
+
+export interface Venue {
+  type: GeometryFeature.Feature;
+  geometry: GeometryPoint;
   properties: {
     name: string;
     slugName: string;
@@ -36,7 +38,9 @@ export interface Venue extends GeometryPoint {
   };
 }
 
-export interface Location extends GeometryPoint {
+export interface Location {
+  type: GeometryFeature.Feature;
+  geometry: GeometryPoint;
   properties: {
     name: string;
     slugName: string;
