@@ -1,81 +1,113 @@
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
+import Collapse from '@material-ui/core/Collapse';
+import IconButton from '@material-ui/core/IconButton';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Hidden from '@material-ui/core/Hidden';
-import Link from 'next/link';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import { Venue } from 'types';
 
-const venues = [];
+const useRowStyles = makeStyles({
+  root: {
+    '& > *': {
+      borderBottom: 'unset',
+    },
+  },
+  row: {
+    borderBottom: 'unset',
+  },
+});
 
-export default function VenueList() {
-  const styles = useStyles();
+function Row(props: { row: Venue }) {
+  const { row } = props;
+  const { name, category, features } = row.properties;
+  const [open, setOpen] = React.useState(false);
+  const classes = useRowStyles();
 
   return (
-    <Grid container className={styles.container} spacing={4}>
-      {venues.map((venue) => (
-        <Grid item key={venue._id} xs={12} md={6}>
-          <Link href={`/venue/${venue.id}`}>
-            <CardActionArea>
-              <Card className={styles.card}>
-                <div className={styles.cardDetails}>
-                  <CardContent>
-                    <Typography
-                      component="h2"
-                      variant="h5"
-                      className={styles.cardText}
-                    >
-                      {venue.title}
-                    </Typography>
-                    <Typography
-                      noWrap={true}
-                      variant="subtitle1"
-                      color="textSecondary"
-                      className={styles.cardText}
-                    >
-                      {venue.url}
-                    </Typography>
-                    <Typography
-                      variant="subtitle1"
-                      paragraph
-                      className={styles.cardText}
-                    >
-                      {venue.description}
-                    </Typography>
-                  </CardContent>
-                </div>
-                <Hidden xsDown>
-                  <CardMedia
-                    className={styles.cardMedia}
-                    image="https://source.unsplash.com/random"
-                    title="Image title"
-                  />
-                </Hidden>
-              </Card>
-            </CardActionArea>
-          </Link>
-        </Grid>
-      ))}
-    </Grid>
+    <React.Fragment>
+      <TableRow className={classes.root}>
+        <TableCell>
+          <IconButton
+            aria-label="expand row"
+            size="small"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          </IconButton>
+        </TableCell>
+        <TableCell component="th" scope="row">
+          {name}
+        </TableCell>
+        <TableCell align="right">{category.name}</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <Box margin={1}>
+              <Typography variant="h6" gutterBottom component="div">
+                Features
+              </Typography>
+              <Table size="small" aria-label="venues">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Feature</TableCell>
+                    <TableCell>Actions</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {features.map((feature) => (
+                    <TableRow key={feature.slugName}>
+                      <TableCell>{feature.name}</TableCell>
+                      {feature.actions.map((action) => (
+                        <TableRow key={action.slugName}>
+                          <TableCell className={classes.row}>
+                            {action.name}
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </Box>
+          </Collapse>
+        </TableCell>
+      </TableRow>
+    </React.Fragment>
   );
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  container: {
-    marginTop: theme.spacing(4),
-  },
-  card: {
-    display: 'flex',
-  },
-  cardDetails: {
-    flex: 1,
-  },
-  cardText: {
-    maxWidth: '26rem',
-  },
-  cardMedia: {
-    width: 160,
-  },
-}));
+interface Props {
+  venues: Array<Venue>;
+}
+
+export default function VenueList(props: Props) {
+  const { venues } = props;
+  return (
+    <TableContainer component={Paper}>
+      <Table aria-label="collapsible table">
+        <TableHead>
+          <TableRow>
+            <TableCell />
+            <TableCell>Venue</TableCell>
+            <TableCell align="right">Category</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {venues.map((row) => (
+            <Row key={row.properties.name} row={row} />
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}
