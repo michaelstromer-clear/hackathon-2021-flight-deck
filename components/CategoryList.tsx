@@ -3,34 +3,7 @@ import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
-
-const tileData = [
-  {
-    img: 'https://source.unsplash.com/random',
-    title: 'Image',
-    author: 'author',
-  },
-  {
-    img: 'https://source.unsplash.com/random',
-    title: 'Image',
-    author: 'author',
-  },
-  {
-    img: 'https://source.unsplash.com/random',
-    title: 'Image',
-    author: 'author',
-  },
-  {
-    img: 'https://source.unsplash.com/random',
-    title: 'Image',
-    author: 'author',
-  },
-  {
-    img: 'https://source.unsplash.com/random',
-    title: 'Image',
-    author: 'author',
-  },
-];
+import { Category } from 'types';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,6 +19,9 @@ const useStyles = makeStyles((theme: Theme) =>
       // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
       transform: 'translateZ(0)',
     },
+    title: {
+      fontSize: 22,
+    },
     titleBar: {
       background:
         'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
@@ -53,19 +29,28 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function CategoryList() {
+interface Props {
+  categories: Array<Category>;
+}
+
+export default function CategoryList(props: Props) {
   const classes = useStyles();
+  const { categories } = props;
 
   return (
     <div className={classes.root}>
       <GridList className={classes.gridList} cols={2.5}>
-        {tileData.map((tile) => (
-          <GridListTile key={tile.img}>
-            <img src={tile.img} alt={tile.title} />
+        {categories.map((tile) => (
+          <GridListTile
+            key={tile.slugName}
+            onClick={() => console.log(tile.name)}
+          >
+            <img src={tile.image} alt={tile.name} />
             <GridListTileBar
-              title={tile.title}
+              title={tile.name}
               classes={{
                 root: classes.titleBar,
+                title: classes.title,
               }}
             />
           </GridListTile>
