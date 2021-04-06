@@ -33,7 +33,7 @@ export default function HealthPassTimelineItem({
       case "healthpass":
         return <QRCode />;
       default:
-        return <HealthPass />;
+        return <HealthPass color={colors.darkBerry}/>;
     }
   };
 

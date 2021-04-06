@@ -2,7 +2,6 @@ import React from "react";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import { Grid, Fab, Typography } from "@material-ui/core";
 import HealthPass from "../../assets/icons/HealthPass";
-import Check from "../../assets/icons/Check";
 import DoneOutlineIcon from "@material-ui/icons/DoneOutline";
 import colors from "../../assets/styles/colors";
 
@@ -50,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexGrow: 1,
   },
   badge: {
-    backgroundColor: "white",
+    backgroundColor: `${colors.white}`,
     borderRadius: "15px",
   },
   badgeContainerItem: {

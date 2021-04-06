@@ -1,7 +1,7 @@
 import React from "react";
 import colors from "../styles/colors";
 
-const HealthPass = () => {
+const IdCard = () => {
   return (
     <svg
       width="27"
@@ -34,4 +34,4 @@ const HealthPass = () => {
   );
 };
 
-export default HealthPass;
+export default IdCard;
