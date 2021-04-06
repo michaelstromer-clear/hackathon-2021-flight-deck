@@ -34,16 +34,10 @@ export interface Venue {
     lng: number;
     category: Category;
     features: Array<Feature>;
+    terminalHours: Maybe<Map<string, string>>;
   };
 }
 
 export interface Feature {
   name: string;
-  slugName: string;
-  actions: Array<Action>;
-}
-
-export interface Action {
-  name: string;
-  slugName: string;
 }

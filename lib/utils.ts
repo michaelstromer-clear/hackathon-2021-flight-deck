@@ -2,9 +2,9 @@ import {
   Venue,
   Feature,
   Category,
-  Action,
   GeometryFeature,
   GeometryType,
+  Maybe,
 } from 'types';
 
 export function createCategory(
@@ -25,7 +25,8 @@ export function createVenue(
   lat: number,
   lng: number,
   category: Category,
-  features: Array<Feature>
+  features: Array<Feature>,
+  terminalHours: Maybe<Map<string, string>>
 ): Venue {
   return {
     type: GeometryFeature.Feature,
@@ -40,18 +41,7 @@ export function createVenue(
       lng,
       category,
       features,
+      terminalHours,
     },
   };
-}
-
-export function createFeature(
-  name: string,
-  slugName: string,
-  actions: Array<Action>
-): Feature {
-  return { name, slugName, actions };
-}
-
-export function createAction(name: string, slugName: string): Action {
-  return { name, slugName };
 }

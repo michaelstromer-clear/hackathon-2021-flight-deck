@@ -70,25 +70,14 @@ function Row(props: { row: Venue }) {
                 Features
               </Typography>
               <Table size="small" aria-label="venues">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Feature</TableCell>
-                    <TableCell>Actions</TableCell>
-                  </TableRow>
-                </TableHead>
                 <TableBody>
-                  {features.map((feature) => (
-                    <TableRow key={feature.slugName}>
-                      <TableCell>{feature.name}</TableCell>
-                      {feature.actions.map((action) => (
-                        <TableRow key={action.slugName}>
-                          <TableCell className={classes.row}>
-                            {action.name}
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableRow>
-                  ))}
+                  <TableRow>
+                    {features.length
+                      ? features.map((feature, index) => (
+                          <TableCell key={index}>{feature}</TableCell>
+                        ))
+                      : null}
+                  </TableRow>
                 </TableBody>
               </Table>
             </Box>
