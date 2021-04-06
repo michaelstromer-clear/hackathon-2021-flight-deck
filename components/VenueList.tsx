@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import FeatureIconList from 'components/FeatureIconList';
+
 import { Venue } from 'types';
 
 const useRowStyles = makeStyles({
@@ -71,12 +73,10 @@ function Row(props: { row: Venue }) {
               </Typography>
               <Table size="small" aria-label="venues">
                 <TableBody>
-                  <TableRow>
-                    {features.length
-                      ? features.map((feature, index) => (
-                          <TableCell key={index}>{feature}</TableCell>
-                        ))
-                      : null}
+                  <TableRow align="center" component="th" scope="row">
+                    {features.length ? (
+                      <FeatureIconList features={features} />
+                    ) : null}
                   </TableRow>
                 </TableBody>
               </Table>
