@@ -30,20 +30,10 @@ export interface Venue {
   properties: {
     name: string;
     slugName: string;
-    location: Location;
     lat: number;
     lng: number;
     category: Category;
     features: Array<Feature>;
-  };
-}
-
-export interface Location {
-  type: GeometryFeature.Feature;
-  geometry: GeometryPoint;
-  properties: {
-    name: string;
-    slugName: string;
   };
 }
 

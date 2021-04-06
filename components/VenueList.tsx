@@ -24,6 +24,12 @@ const useRowStyles = makeStyles({
   row: {
     borderBottom: 'unset',
   },
+  title: {
+    fontSize: 22,
+  },
+  paragraph: {
+    fontSize: 16,
+  },
 });
 
 function Row(props: { row: Venue }) {
@@ -44,10 +50,17 @@ function Row(props: { row: Venue }) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row">
+        <TableCell
+          className={classes.paragraph}
+          align="center"
+          component="th"
+          scope="row"
+        >
           {name}
         </TableCell>
-        <TableCell align="right">{category.name}</TableCell>
+        <TableCell className={classes.paragraph} align="right">
+          {category.name}
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -92,14 +105,19 @@ interface Props {
 
 export default function VenueList(props: Props) {
   const { venues } = props;
+  const classes = useRowStyles();
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
             <TableCell />
-            <TableCell>Venue</TableCell>
-            <TableCell align="right">Category</TableCell>
+            <TableCell className={classes.title} align="center">
+              Venue
+            </TableCell>
+            <TableCell className={classes.title} align="right">
+              Category
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

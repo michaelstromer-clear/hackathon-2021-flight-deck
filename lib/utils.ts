@@ -1,7 +1,6 @@
 import {
   Venue,
   Feature,
-  Location,
   Category,
   Action,
   GeometryFeature,
@@ -20,29 +19,9 @@ export function createCategory(
   };
 }
 
-export function createLocation(
-  name: string,
-  slugName: string,
-  lat: number,
-  lng: number
-): Location {
-  return {
-    type: GeometryFeature.Feature,
-    geometry: {
-      type: GeometryType.Point,
-      coordinates: [lat, lng],
-    },
-    properties: {
-      name,
-      slugName,
-    },
-  };
-}
-
 export function createVenue(
   name: string,
   slugName: string,
-  location: Location,
   lat: number,
   lng: number,
   category: Category,
@@ -57,7 +36,6 @@ export function createVenue(
     properties: {
       name,
       slugName,
-      location,
       lat,
       lng,
       category,
