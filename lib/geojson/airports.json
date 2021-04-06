@@ -8,7 +8,6 @@
         "coordinates": [-73.87, 40.77]
       },
       "properties": {
-        "mylist": [],
         "name": "LGA",
         "features": ["identity"],
         "terminalHours": {

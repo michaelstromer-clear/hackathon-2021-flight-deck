@@ -16,7 +16,6 @@ export default function Index() {
               Go to the venues page
             </Button>
           </Link>
-          <Map height={1000} />
         </Box>
       </Container>
     </React.Fragment>
