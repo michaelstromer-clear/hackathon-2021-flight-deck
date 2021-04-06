@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { themeDark, themeLight } from '../lib/theme';
 import Header from 'components/Header';
 
+
 export default function MyApp({ Component, pageProps }) {
   const [darkState, setDarkState] = useState(false);
   const handleThemeChange = () => {

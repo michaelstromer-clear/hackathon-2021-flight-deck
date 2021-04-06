@@ -14,7 +14,7 @@ export default function Header({ darkState, handleThemeChange }) {
   const classes = useStyles();
 
   const links = [
-    { label: 'Travel', href: '/travel' },
+    { label: 'Travel', href: '/maps' },
     { label: 'Health', href: '/health' },
     // { label: 'Sign Out', href: '/auth/signout' },
   ]
