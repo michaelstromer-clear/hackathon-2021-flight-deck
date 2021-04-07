@@ -1,14 +1,8 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  Link as LinkText,
-  Switch,
-} from '@material-ui/core';
+import { AppBar, Toolbar, Typography, Button, Switch } from '@material-ui/core';
 import Link from 'next/link';
+import ClearLogo from 'assets/icons/ClearLogo';
 
 export default function Header({ darkState, handleThemeChange }) {
   const classes = useStyles();
@@ -29,14 +23,12 @@ export default function Header({ darkState, handleThemeChange }) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" color="transparent" elevation={0}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            <Link href="/">
-              <LinkText href="" color="inherit">
-                CLEAR Flight Deck
-              </LinkText>
-            </Link>
+            <a href="/">
+              <ClearLogo />
+            </a>
           </Typography>
           <Switch checked={darkState} onChange={handleThemeChange} />
           {links}
@@ -54,6 +46,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginRight: theme.spacing(2),
   },
   title: {
+    paddingTop: 20,
     flexGrow: 1,
   },
   list: {

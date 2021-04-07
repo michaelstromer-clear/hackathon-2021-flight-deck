@@ -30,30 +30,14 @@ export interface Venue {
   properties: {
     name: string;
     slugName: string;
-    location: Location;
     lat: number;
     lng: number;
     category: Category;
     features: Array<Feature>;
-  };
-}
-
-export interface Location {
-  type: GeometryFeature.Feature;
-  geometry: GeometryPoint;
-  properties: {
-    name: string;
-    slugName: string;
+    terminalHours: Maybe<Map<string, string>>;
   };
 }
 
 export interface Feature {
   name: string;
-  slugName: string;
-  actions: Array<Action>;
-}
-
-export interface Action {
-  name: string;
-  slugName: string;
 }

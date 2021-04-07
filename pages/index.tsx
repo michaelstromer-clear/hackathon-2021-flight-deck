@@ -59,6 +59,5 @@ flex-direction: column;
   align-items: center;
   justify-content: center;
   align-content: center;
-  /* text-align: center; */
 
 `

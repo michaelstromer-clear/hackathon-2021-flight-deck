@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import FeatureIconList from 'components/FeatureIconList';
+
 import { Venue } from 'types';
 
 const useRowStyles = makeStyles({
@@ -23,6 +25,12 @@ const useRowStyles = makeStyles({
   },
   row: {
     borderBottom: 'unset',
+  },
+  title: {
+    fontSize: 22,
+  },
+  paragraph: {
+    fontSize: 16,
   },
 });
 
@@ -44,10 +52,17 @@ function Row(props: { row: Venue }) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row">
+        <TableCell
+          className={classes.paragraph}
+          align="center"
+          component="th"
+          scope="row"
+        >
           {name}
         </TableCell>
-        <TableCell align="right">{category.name}</TableCell>
+        <TableCell className={classes.paragraph} align="right">
+          {category.name}
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -57,25 +72,12 @@ function Row(props: { row: Venue }) {
                 Features
               </Typography>
               <Table size="small" aria-label="venues">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Feature</TableCell>
-                    <TableCell>Actions</TableCell>
-                  </TableRow>
-                </TableHead>
                 <TableBody>
-                  {features.map((feature) => (
-                    <TableRow key={feature.slugName}>
-                      <TableCell>{feature.name}</TableCell>
-                      {feature.actions.map((action) => (
-                        <TableRow key={action.slugName}>
-                          <TableCell className={classes.row}>
-                            {action.name}
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableRow>
-                  ))}
+                  <TableRow align="center" component="th" scope="row">
+                    {features.length ? (
+                      <FeatureIconList features={features} />
+                    ) : null}
+                  </TableRow>
                 </TableBody>
               </Table>
             </Box>
@@ -92,14 +94,19 @@ interface Props {
 
 export default function VenueList(props: Props) {
   const { venues } = props;
+  const classes = useRowStyles();
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
             <TableCell />
-            <TableCell>Venue</TableCell>
-            <TableCell align="right">Category</TableCell>
+            <TableCell className={classes.title} align="center">
+              Venue
+            </TableCell>
+            <TableCell className={classes.title} align="right">
+              Category
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

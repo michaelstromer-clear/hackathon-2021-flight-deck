@@ -3,6 +3,7 @@ import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
+import ButtonBase from '@material-ui/core/ButtonBase';
 import { Category } from 'types';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -31,11 +32,12 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface Props {
   categories: Array<Category>;
+  onSelectCategory: (category: string) => void;
 }
 
 export default function CategoryList(props: Props) {
   const classes = useStyles();
-  const { categories } = props;
+  const { categories, onSelectCategory } = props;
 
   return (
     <div className={classes.root}>
@@ -45,7 +47,9 @@ export default function CategoryList(props: Props) {
             key={tile.slugName}
             onClick={() => console.log(tile.name)}
           >
-            <img src={tile.image} alt={tile.name} />
+            <ButtonBase onClick={() => onSelectCategory(tile.slugName)}>
+              <img src={tile.image} alt={tile.name} />
+            </ButtonBase>
             <GridListTileBar
               title={tile.name}
               classes={{
