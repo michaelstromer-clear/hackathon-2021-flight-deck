@@ -5,12 +5,12 @@ import HealthPass from "../../assets/icons/HealthPass";
 import DoneOutlineIcon from "@material-ui/icons/DoneOutline";
 import colors from "../../assets/styles/colors";
 
-export default function HealthPassBadgeContainer({}) {
+export default function HealthPassBadgeContainer({ resync }) {
   const classes = useStyles();
 
   return (
-    <Grid container justify="center" className={classes.root} spacing={6}>
-      <Grid item className={classes.badgeContainerItem}>
+    <Grid container justify="center" className={classes.root}>
+      <Grid item className={classes.badgeContainerItem} >
         <Grid container direction="column" alignItems="center">
           <Fab className={classes.badge}>
             <HealthPass color={`${colors.darkBerry}`}/>
@@ -23,7 +23,7 @@ export default function HealthPassBadgeContainer({}) {
       <Grid item className={classes.badgeContainerItem}>
         <Grid container direction="column" alignItems="center">
           <Fab className={classes.badge}>
-            <HealthPass color={`${colors.borderGray}`}/>
+            <HealthPass color={resync === true ? `${colors.darkBerry}` : `${colors.borderGray}`}/>
           </Fab>
           <Typography variant="h6">Dose #2</Typography>
         </Grid>
@@ -47,6 +47,7 @@ export default function HealthPassBadgeContainer({}) {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
+    maxHeight: '100px',
   },
   badge: {
     backgroundColor: `${colors.white}`,

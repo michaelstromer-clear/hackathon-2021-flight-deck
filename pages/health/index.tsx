@@ -7,110 +7,83 @@ import Box from "@material-ui/core/Box";
 import HealthPassTimeline from "../../components/healthpasstimeline/HealthPassTimeline";
 import HealthPassTimelineFilters from "../../components/healthpasstimeline/HealthPassTimelineFilters";
 import HealthPassBadgeContainer from "../../components/healthpasstimeline/HealthPassBadgeContainer";
-
-const healthPassTimelineObjects = [
-  {
-    title: "Created a Lab Link",
-    description: "Link created with BioReference Laboratories",
-    date: "4/1/2021",
-    icon: "lablink",
-    type: "medical",
-  },
-  {
-    title: "Synced Lab Records",
-    description: "Synced from BioReference Laboratories",
-    date: "4/1/2021",
-    icon: "lablink",
-    type: "medical",
-  },
-  {
-    title: "Lab Result Received",
-    description: "Negative Covid PCR Exam",
-    date: "4/1/2021",
-    icon: "labresult",
-    type: "medical",
-  },
-  {
-    title: "Gershwin Theatre",
-    description: "Checked in at Gershwin Theatre",
-    date: "4/2/2021",
-    icon: "healthpass",
-    type: "event",
-  },
-  {
-    title: "First Covid Vaccine",
-    description: "Pfizer CVX 209 Dose #1",
-    date: "4/3/2021",
-    icon: "vaccine",
-    type: "medical",
-  },
-  {
-    title: "Lab Result Received",
-    description: "Negative Covid PCR Exam",
-    date: "4/3/2021",
-    icon: "labresult",
-    type: "medical",
-  },
-  {
-    title: "New York Knicks Green Healthpass",
-    description: "Checked in at Madison Square Garden with a Green HealthPass",
-    date: "4/5/2021",
-    icon: "healthpass",
-    type: "event",
-    isLast: true,
-  },
-];
+import HealthPassResyncButton from "../../components/healthpasstimeline/HealthPassResyncButton";
+import healthPassObjects from '../../lib/timelineObjects';
 
 export default function Health() {
   const classes = useStyles();
   const [filterState, setFilterState] = useState("none");
+  const [healthPassTimelineObjects, setHealthPassTimelineObjects] = useState(healthPassObjects);
+  const [resync, setResync] = useState(false);
+
+  const mockResync = () => {
+    setResync(true);
+    setTimeout(() => {
+      if(!resync) {
+      healthPassTimelineObjects.push({
+        title: "Second Covid Vaccine",
+        description: "Pfizer CVX 209 Dose #2",
+        date: "4/6/2021",
+        icon: "vaccine",
+        type: "medical",
+      })
+      setFilterState('resync');
+      setResync(false);
+    }
+    }, 3000)
+  }
 
   const setPageFilterState = (filter) => {
     setFilterState(filter);
   };
 
   return (
-    <Container maxWidth="lg">
-      <Box my={4}>
-        <Grid container className={classes.titleContainer}>
-          <Grid item style={{ flex: 1, flexGrow: 1, display: "flex" }}></Grid>
-          <Grid
-            item
-            style={{
-              flex: 1,
-              flexGrow: 1,
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <Typography variant="h4">A Clear Path Back</Typography>
-          </Grid>
-          <Grid
-            item
-            style={{
-              flex: 1,
-              display: "flex",
-              marginLeft: "auto",
-              justifyContent: "flex-end",
-            }}
-          >
-            <HealthPassTimelineFilters
+    <Container maxWidth="xl">
+      <Grid container style={{ height: "94vh", justifyContent:'center' }}>
+        <Grid item xs={8}>
+          <Box my={4}>
+            <Grid container className={classes.titleContainer}>
+              <Grid
+                item
+                style={{ flex: 1, flexGrow: 1, display: "flex" }}
+              ></Grid>
+              <Grid
+                item
+                style={{
+                  flex: 1,
+                  flexGrow: 1,
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <Typography variant="h4">A CLEAR Path Back</Typography>
+              </Grid>
+              <Grid
+                item
+                style={{
+                  flex: 1,
+                  display: "flex",
+                  marginLeft: "auto",
+                  justifyContent: "flex-end",
+                }}
+              >
+                <HealthPassResyncButton resync={resync} setResync={mockResync}/>
+              </Grid>
+            </Grid>
+          </Box>
+          <Box my={4}></Box>
+          <Box my={4}>
+            <HealthPassBadgeContainer resync={healthPassTimelineObjects.length > 7}/>
+          </Box>
+          <Box my={4}>
+            <HealthPassTimeline
+              size={'md'}
               filterState={filterState}
-              setFilterState={setFilterState}
+              healthPassTimelineObjects={healthPassTimelineObjects}
             />
-          </Grid>
+          </Box>
         </Grid>
-      </Box>
-      <Box my={4}></Box>
-      <Box my={4}>
-        <HealthPassBadgeContainer />
-      </Box>
-      <Box my={4}>
-        <HealthPassTimeline
-          filterState={filterState}
-          healthPassTimelineObjects={healthPassTimelineObjects}
-        />
-      </Box>
+      </Grid>
     </Container>
   );
 }

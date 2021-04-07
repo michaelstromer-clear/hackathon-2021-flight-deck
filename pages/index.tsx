@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import VenueCard from 'components/VenueCard';
+import { Typography, Box, Button } from '@material-ui/core';
 import styled from 'styled-components';
 import Map from '../components/Map';
 import Card from '../components/DashCard';
+import HealthPassTimeline from '../components/healthpasstimeline/HealthPassTimeline';
+import HealthPassBadgeContainer from '../components/healthpasstimeline/HealthPassBadgeContainer';
+import healthPassObjects from '../lib/timelineObjects';
+import VenueCard from 'components/VenueCard';
 
 const initialMap = {
   width: 500,
@@ -59,7 +63,25 @@ export default function Index() {
           description="Whether it's a concert, comedy show or theater performance, we've got you covered."
         />
       </Column>
-      <Column>Hey im the healthcare timeline</Column>
+      <Column
+        style={{
+          overflowY: 'auto',
+          justifyContent: 'flex-start',
+          paddingTop: '32px',
+        }}
+      >
+        <Typography variant="h4" style={{ marginBottom: '36px' }}>
+          A CLEAR Path Back
+        </Typography>
+        <HealthPassBadgeContainer
+          resync={healthPassObjects.length > 7 ? true : false}
+        />
+        <HealthPassTimeline
+          filterState={'none'}
+          size={'sm'}
+          healthPassTimelineObjects={healthPassObjects}
+        />
+      </Column>
     </Container>
   );
 }
