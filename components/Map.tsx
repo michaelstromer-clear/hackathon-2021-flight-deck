@@ -4,7 +4,7 @@ import { Container } from '@material-ui/core';
 import mapboxgl from "mapbox-gl";
 
 import MapPopup from "../components/MapPopup";
-import Airportsgeojson from "../lib/geojson/airports.json";
+import Allgeojson from "../lib/geojson/venues.json";
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoibWF0aGV3bGVsYW5kIiwiYSI6ImNrMzdudmk2dzAwcmEzaHBuYXB5cW1mcXkifQ.C33jSB1YL4IjehYORyJXUA";
@@ -15,8 +15,20 @@ Map.defaultProps = {
   zoom: 10,
   height: 800,
   width: 800,
-  geojson: Airportsgeojson
+  geojson: Allgeojson
 }
+
+function translateGeojson(geojson) {
+  geojson.features.map(f => {
+    const [lat, lng] = f.geometry.coordinates;
+    f.geometry.coordinates = [lng, lat];
+    return f;
+  })
+
+  return geojson;
+}
+
+let map;
 
 
 export default function Map({height, width, center, zoom, geojson}) {
@@ -24,12 +36,14 @@ export default function Map({height, width, center, zoom, geojson}) {
 
     useEffect(() => {
 
-        const map = new mapboxgl.Map({ 
+        map = new mapboxgl.Map({ 
             container: mapContainer.current, 
             style: "mapbox://styles/mapbox/dark-v10", 
         center, 
         zoom
       });
+
+      (translateGeojson(geojson))
 
 
         function populateMap() {
@@ -52,9 +66,12 @@ export default function Map({height, width, center, zoom, geojson}) {
             map.on('click', 'airports', function (e) {
               
               const coordinates = e.features[0].geometry.coordinates.slice();
-              const {name, image} = e.features[0].properties;
+              const {name} = e.features[0].properties;
+              console.log(e.features[0])
+              const category = JSON.parse(e.features[0].properties.category);
+              const {image} = category;
 
-              const services = JSON.parse(e.features[0].properties.services)
+              const services = JSON.parse(e.features[0].properties.features)
 
               while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
                 coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
@@ -70,7 +87,7 @@ export default function Map({height, width, center, zoom, geojson}) {
                                       .addTo(map);
               }
 
-              addPopup(<MapPopup name={name} image={image} services={services} />, coordinates[1], coordinates[0])
+              addPopup(<MapPopup name={name} image={image} services={services}/>, coordinates[1], coordinates[0])
 
 
 
@@ -104,7 +121,11 @@ export default function Map({height, width, center, zoom, geojson}) {
         return () => map.remove();
     }, [])
 
-    // return (<div>Mappy</div>)
+    useEffect(() => {
+      if (!map || !center) return;
+
+      map.flyTo({center, zoom})
+    }, [center])
 
   return (
         <div ref={mapContainer} style={{height, width}}/>

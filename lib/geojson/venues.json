@@ -77,7 +77,7 @@
         "category": {
           "name": "Sports",
           "slugName": "sports",
-          "image": "https://images.unsplash.com/photo-1479546085767-8903baea90c6?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=634&q=80"
+          "image": "https://static.clubs.nfl.com/image/private/t_editorial_landscape_12_desktop_2x/f_auto/seahawks/vkncdxjvjhwy5ks0ri4f.jpg"
         },
         "features": ["payment"]
       }
@@ -375,7 +375,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [47.5914026, -122.3347025]
+        "coordinates": [47.5814026, -122.3347025]
       },
       "properties": {
         "name": "Safeco Field",

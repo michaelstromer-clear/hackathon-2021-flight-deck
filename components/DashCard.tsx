@@ -17,9 +17,8 @@ const useStyles = makeStyles({
 export default function MapPopup(props) {
   const classes = useStyles();
 
-  const {name, services, image} = props
+  const {name, services, image, changeMap} = props
 
-  console.log("props", props)
 
   return (
     <Card className={classes.root}>
@@ -41,11 +40,8 @@ export default function MapPopup(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="secondary">
-          See Terminal A Info
-        </Button>
-        <Button size="small" color="secondary">
-          See Terminal B Info
+        <Button size="small" color="secondary" onClick={changeMap}>
+          See How to use CLEAR in Seattle
         </Button>
       </CardActions>
     </Card>

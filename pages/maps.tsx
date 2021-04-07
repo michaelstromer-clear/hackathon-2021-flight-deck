@@ -1,6 +1,7 @@
 import React, {useEffect, useRef} from 'react';
 import { Container, Typography, Box, Button } from '@material-ui/core';
 import mapboxgl from "mapbox-gl"
+import allLocations from "../lib/geojson/venues.json"
 
 import Map from "../components/Map"
 
@@ -10,6 +11,7 @@ const fullMapProps = {
   zoom: 4,
   height: 800,
   width: 1300,
+  geojson: allLocations
 }
 
 mapboxgl.accessToken =
