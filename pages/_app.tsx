@@ -9,7 +9,7 @@ import Header from 'components/Header';
 
 
 export default function MyApp({ Component, pageProps }) {
-  const [darkState, setDarkState] = useState(false);
+  const [darkState, setDarkState] = useState(true);
   const handleThemeChange = () => {
     setDarkState(!darkState);
   };
