@@ -1,0 +1,25 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [-75, 35]
+      },
+      "properties": {
+        "name": "Metropolitan Museum of Art",
+        "features": ["healthpass"]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [-71, 38]
+      },
+      "properties": {
+        "name": "City Winery",
+        "features": ["healthpass", "ticketing"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [-76, 38]
+      },
+      "properties": {
+        "name": "Citi Field",
+        "features": ["ticketing", "payment"],
+        "entrances": {
+          "Gate 2": "3 hours before game time"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [-121, 38]
+      },
+      "properties": {
+        "name": "Dodgers Stadium",
+        "features": ["ticketing"],
+        "entrances": {
+          "Blue Gate": "9am - 8pm",
+          "Green Gate": "9am - 9pm"
+        }
+      }
+    }
+  ]
+}
